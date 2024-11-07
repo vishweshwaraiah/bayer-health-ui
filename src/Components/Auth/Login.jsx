@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import './Login.css';
 
 const Login = (props) => {
-  const { clickHandler } = props;
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -24,7 +22,6 @@ const Login = (props) => {
     }
 
     try {
-      debugger;
       const response = {
         status: 200,
         email: email,
@@ -38,7 +35,7 @@ const Login = (props) => {
       // const res = await response.json();
 
       if (response.status === 200) {
-        clickHandler(response.email);
+        props.clickHandler(response.email);
       } else {
         setError(true);
         setErrorMessage('Wrong response!');
