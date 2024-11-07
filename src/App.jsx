@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import Login from './Components/Auth/Login';
 import Registration from './Components/Auth/Register';
+import LandingPage from './Components/LandingPage/LandingPage';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // change below to false to see login page here
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [userName, setUserName] = useState('');
 
@@ -20,20 +23,14 @@ function App() {
     }
   };
 
-  return (
-    <div className='main-page'>
-      {isLoggedIn ? (
-        <div className='main-page'>
-          This is Home/Main Page and User is {userName}
-        </div>
-      ) : (
-        <>
-          {isLogin ? <Login clickHandler={getAuthDetails} /> : <Registration />}
-          <button className='mt-3' onClick={toggleLogin}>
-            Login/Register
-          </button>
-        </>
-      )}
+  return isLoggedIn ? (
+    <LandingPage />
+  ) : (
+    <div className='main_page'>
+      {isLogin ? <Login clickHandler={getAuthDetails} /> : <Registration />}
+      <button className='mt-3' onClick={toggleLogin}>
+        Login/Register
+      </button>
     </div>
   );
 }
