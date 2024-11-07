@@ -18,3 +18,24 @@
 .nav_bar {
     width: 100vw;
 }
+
+.nav_bar .nav-link {
+    color      : #fff;
+    font-weight: bold;
+}
+
+.bg-orange {
+    background-color: rgb(179, 119, 9);
+}
+
+#navbarNav {
+    text-align     : center;
+    display        : flex;
+    justify-content: center;
+}
+
+.page_title {
+    color     : #fff;
+    text-align: center;
+    padding   : 3rem;
+}

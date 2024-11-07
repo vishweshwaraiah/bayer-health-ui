@@ -1,0 +1,10 @@
+.booking_page {
+    width : 1140px;
+    margin: auto;
+}
+
+.booking_wrapper {
+    display       : flex;
+    flex-direction: row;
+    gap           : 5rem;
+}

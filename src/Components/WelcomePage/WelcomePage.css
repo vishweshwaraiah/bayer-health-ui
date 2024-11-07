@@ -1,0 +1,27 @@
+.welcome_page {
+    display         : flex;
+    flex-direction  : row;
+    gap             : 1rem;
+    background-color: rgb(223, 216, 216);
+}
+
+.side_nav {
+    width           : 20vw;
+    height          : 100vh;
+    background-color: rgb(19, 19, 163);
+    color           : #fff;
+}
+
+.side_nav .nav-link {
+    color: #fff;
+}
+
+.side_nav_header {
+    padding    : 0 1rem;
+    padding-top: 1rem;
+}
+
+.welcome_content {
+    display       : flex;
+    flex-direction: column;
+}

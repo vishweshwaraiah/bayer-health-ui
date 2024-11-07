@@ -1,38 +1,39 @@
 import { useState } from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Components/Auth/Login';
 import Registration from './Components/Auth/Register';
 import LandingPage from './Components/LandingPage/LandingPage';
+import WelcomePage from './Components/WelcomePage/WelcomePage';
+import About from './Components/About';
+import 'bootstrap/dist/css/bootstrap.css';
+import './App.css';
+import BookingPage from './Components/BookingPage/BookingPage';
 
-function App() {
-  const [isLogin, setIsLogin] = useState(true);
-  // change below to false to see login page here
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  const [userName, setUserName] = useState('');
-
-  const toggleLogin = () => {
-    setIsLogin(!isLogin);
+const App = () => {
+  const getAuthDetails = () => {
+    console.log('User loggedin!');
   };
 
-  const getAuthDetails = async (email) => {
-    if (email) {
-      setIsLoggedIn(true);
-      setUserName(email);
-    }
-  };
-
-  return isLoggedIn ? (
-    <LandingPage />
-  ) : (
-    <div className='main_page'>
-      {isLogin ? <Login clickHandler={getAuthDetails} /> : <Registration />}
-      <button className='mt-3' onClick={toggleLogin}>
-        Login/Register
-      </button>
-    </div>
+  return (
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<LandingPage />} />
+        <Route exact path='/welcome' element={<WelcomePage />} />
+        <Route exact path='/book_appointment' element={<BookingPage />} />
+        <Route exact path='/about' element={<About />} />
+        <Route
+          exact
+          path='/login'
+          element={<Login clickHandler={getAuthDetails} />}
+        />
+        <Route
+          exact
+          path='/register'
+          element={<Registration clickHandler={getAuthDetails} />}
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
