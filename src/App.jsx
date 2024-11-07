@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import Login from './Components/Auth/Login';
+import Registration from './Components/Auth/Register';
+import { RouterProvider } from 'react-router-dom';
+import router from './Routes/routes';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLogin, setIsLogin] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [userName, setUserName] = useState('');
+
+  const toggleLogin = () => {
+    setIsLogin(!isLogin);
+  };
+
+  const getAuthDetails = async (email) => {
+    if (email) {
+      setIsLoggedIn(true);
+      setUserName(email);
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className='main-page'>
+      <RouterProvider router={router}>
+        {isLoggedIn ? (
+          <div className='main-page'>
+            This is Home/Main Page and User is {userName}
+          </div>
+        ) : (
+          <>
+            {isLogin ? (
+              <Login clickHandler={getAuthDetails} />
+            ) : (
+              <Registration />
+            )}
+            <button className='mt-3' onClick={toggleLogin}>
+              Login/Register
+            </button>
+          </>
+        )}
+      </RouterProvider>
+    </div>
+  );
 }
 
-export default App
+export default App;
