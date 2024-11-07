@@ -19,7 +19,7 @@ const Login = (props) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     // Add your login logic here
-    // const url = '/api/login';
+    const url = 'http://localhost:5001/api/auth/login';
 
     if (!email) {
       alert('Username is required!');
@@ -30,20 +30,22 @@ const Login = (props) => {
     }
 
     try {
-      const response = {
-        status: 200,
-        email: email,
-      };
+      const response = await fetch(url, {
+        method:'POST',
+        headers: {
+          'Content-Type': 'application/json'
+      },
+        body:JSON.stringify({
+        login_name: email,
+        password,
+        })
+      });
 
-      // const response = await fetch(url, {
-      //   username: email,
-      //   password,
-      // });
-
-      // const res = await response.json();
+      const res = await response.json();
 
       if (response.status === 200) {
-        props.clickHandler(response.email);
+        navigate("/welcome");
+        props.clickHandler(res);
       } else {
         setError(true);
         setErrorMessage('Wrong response!');
